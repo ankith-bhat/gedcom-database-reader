@@ -29,6 +29,8 @@ public class Driver {
     }
 
     public static void main(String[] args) throws IOException {
+        System.out.println("Program Start");
+
         File file = new File("555SAMPLE.GED");
 
         // todo try-catch
@@ -38,6 +40,10 @@ public class Driver {
         String st;
         while ((st = br.readLine()) != null)
             System.out.println(st);
+
+
+        System.out.println("Program Completed");
+
     }
 }
 
