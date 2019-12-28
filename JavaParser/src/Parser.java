@@ -22,9 +22,9 @@
 
 import java.io.*;
 
-public class Driver {
+class Parser {
 
-    public Driver() {
+    public Parser() {
 
     }
 
@@ -34,16 +34,40 @@ public class Driver {
         File file = new File("555SAMPLE.GED");
 
         // todo try-catch
-        BufferedReader br = new BufferedReader(new FileReader(file));
+        BufferedReader file_buffer = new BufferedReader(new FileReader(file));
 
         // todo try-catch
-        String st;
-        while ((st = br.readLine()) != null)
-            System.out.println(st);
+        String line_string;
+        int line_num = 0;
+
+        // read line-by-line
+        while ((line_string = file_buffer.readLine()) != null) {
+            // edge case: first line has extra character
+            if (line_num == 0){
+               line_string = line_string.substring(1);
+               if (!line_string.equals("0 HEAD")){
+                  throw new RuntimeException("GEDCOM file does not start correctly");
+                }
+               System.out.println("Head found");
+            }
+
+            else if (line_string.equals("0 TRLR")) {
+                System.out.println("Trailer found");
+            }
+
+            else
+            {
+                if (line_string.charAt(0) == '0') {
+                    System.out.println("New Person");
+                }
+            }
+
+            System.out.println(line_string);
+            line_num++;
+        }
 
 
         System.out.println("Program Completed");
 
     }
 }
-
