@@ -25,7 +25,14 @@ import java.util.ArrayList;
 class Person {
     // Private classes are added for all the possible attributes for a person
 
-    private class Name {
+    private class PersonAttribute {
+        public void addAttribute(String attr, String contents){
+
+        }
+
+    }
+
+    private class Name extends PersonAttribute{
         private String first_name;
         private String middle_name;
         private String last_name;
@@ -46,7 +53,7 @@ class Person {
         }
     }
 
-    private class Address {
+    private class Address extends PersonAttribute {
         private String addr_line1;
         // private String addr_line2;
         private String city;
@@ -60,7 +67,7 @@ class Person {
         }
     }
 
-    private class Phone {
+    private class Phone extends PersonAttribute {
         private String number;
 
         public Phone() {
@@ -72,9 +79,32 @@ class Person {
     private ArrayList<Address> addrs[]; // person may have more than one address
     private ArrayList<Phone> phone[];
 
-    public void addAttribute(){
+    private PersonAttribute current_attribute;
 
+    public void newAttribute(String line_string){
+        if (line_string.charAt(0) != 1)
+        {
+            throw new RuntimeException("This line does not add a new individual attribute");
+        }
+        // edge case for SEX attribute
 
+        String attr = line_string.substring(2,6);
+        String contents = line_string.substring(7);
+
+        System.out.println(attr);
+
+    }
+
+    public void addAttribute(String line_string){
+        if (line_string.charAt(0) != 2)
+        {
+            throw new RuntimeException("This line does not have the correct number for adding information correctly");
+        }
+
+        String attr = line_string.substring(2,6);
+        String contents = line_string.substring(7);
+
+        current_attribute.addAttribute(attr, contents);
     }
 
 
