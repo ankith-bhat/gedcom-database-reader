@@ -87,6 +87,19 @@ public class Individual {
         }
     }
 
+    private class Caste extends Attribute{
+        private String caste;
+
+        public Caste(String caste) {
+            this.caste = caste;
+        }
+
+        @Override
+        public void addAttribute(String attr, String contents) {
+
+        }
+    }
+
     private class Birth extends Event {
 
         public Birth() {}
@@ -100,14 +113,18 @@ public class Individual {
         public Death() {}
     }
 
-
+    private String id;
     private Name name; // can a person have more than one name?
     private Sex sex;
+    private Birth birth;
+    private Baptism baptism;
+    private Death death;
+    private Caste caste;
 
     private Attribute current_attribute;
 
-    public Individual() {
-
+    public Individual(String id) {
+        this.id = id.replaceAll("@", "");
     }
 
     public void newAttribute(String line_string){
@@ -136,9 +153,27 @@ public class Individual {
                 name = new Name(contents);
                 current_attribute = name;
             }
-
+            else if (attr.equals("CAST"))
+            {
+                caste = new Caste(contents);
+                current_attribute = null;
+            }
+            else if (attr.equals("BIRT"))
+            {
+                birth = new Birth();
+                current_attribute = birth;
+            }
+            else if (attr.equals("BAPT"))
+            {
+                baptism = new Baptism();
+                current_attribute = baptism;
+            }
+            else if (attr.equals("DEAT"))
+            {
+                death = new Death();
+                current_attribute = death;
+            }
         }
-
 
         System.out.println(attr + " " + contents);
 
