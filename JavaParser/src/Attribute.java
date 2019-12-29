@@ -20,15 +20,12 @@
  * SOFTWARE.
  */
 
-public class Place extends Attribute{
-    private String place;
+public abstract class Attribute {
 
-    public Place(String place) {
-        this.place = place;
+
+    public Attribute() {
     }
 
-    @Override
-    public void addAttribute(String attr, String contents) {
+    public abstract void addAttribute(String attr, String contents);
 
-    }
 }

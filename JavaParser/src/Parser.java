@@ -31,7 +31,7 @@ public class Parser {
     public static void main(String[] args) throws IOException {
         System.out.println("Program Start");
 
-        File file = new File("555SAMPLE.GED");
+        File file = new File("../samples/gedcom_sample_file.GED");
 
         // todo try-catch
         BufferedReader file_buffer = new BufferedReader(new FileReader(file));
@@ -44,21 +44,20 @@ public class Parser {
         while ((line_string = file_buffer.readLine()) != null) {
             // edge case: first line has extra character
             if (line_num == 0){
-               line_string = line_string.substring(1);
-               if (!line_string.equals("0 HEAD")){
+               if (!line_string.contains("0 HEAD")){
                   throw new RuntimeException("GEDCOM file does not start correctly");
                 }
                System.out.println("Head found");
             }
 
-            else if (line_string.equals("0 TRLR")) {
+            else if (line_string.contains("0 TRLR")) {
                 System.out.println("Trailer found");
             }
 
             else
             {
                 if (line_string.charAt(0) == '0') {
-                    System.out.println("New Person");
+                    System.out.println("New Entity");
                 }
             }
 

@@ -20,15 +20,24 @@
  * SOFTWARE.
  */
 
-public class Place extends Attribute{
-    private String place;
+public class Event extends Attribute {
+    private Place place;
+    private String date;
 
-    public Place(String place) {
-        this.place = place;
+    public Event() {
+
     }
 
     @Override
     public void addAttribute(String attr, String contents) {
+        if (attr.equals("PLAC"))
+        {
+            place = new Place(contents);
+        }
+        else if (attr.equals("Date"));
+        {
+            date = contents;
+        }
 
     }
 }

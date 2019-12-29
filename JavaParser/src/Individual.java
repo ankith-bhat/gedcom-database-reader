@@ -20,16 +20,14 @@
  * SOFTWARE.
  */
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Individual {
     // Private classes are added for all the possible attributes for a person
-
-    private class Attribute {
-        public void addAttribute(String attr, String contents) {
-
-        }
-    }
 
     private class Name extends Attribute{
         private String first_name;
@@ -40,18 +38,29 @@ public class Individual {
 
         }
 
-        public Name(String first_name, String last_name){
-            this.first_name = first_name;
-            this.last_name = last_name;
+        public Name(String contents){
+            String[] split = contents.split(" ");
+
+            if (split.length == 1){
+                first_name = split[0];
+            }
+            else if (split.length == 2) {
+                first_name = split[0];
+                last_name = split[1];
+            }
+            else {
+                first_name = split[0];
+                for (int i = 1; i < split.length - 2; i++)
+                {
+                    if (i != 1) middle_name += " ";
+                    middle_name+= split[i];
+                }
+                last_name = split[split.length -1];
+            }
         }
 
-        public Name(String first_name, String middle_name, String last_name){
-            this.first_name = first_name;
-            this.middle_name = middle_name;
-            this.last_name = last_name;
-        }
-
-        public void addAttribute(String attr, String contents) {
+        @Override
+        public void addAttribute(@NotNull String attr, String contents) {
             if (attr.equals("SURN")) {
                 last_name = "contents";
             }
@@ -65,45 +74,73 @@ public class Individual {
         }
     }
 
-    private class Address extends Attribute {
-        private String addr_line1;
-        // private String addr_line2;
-        private String city;
-        private String state;
-        private String postal;
-        private String country;
+    private class Sex extends Attribute {
+        private String sex;
 
-        public Address()
-        {
+        public Sex(String sex) {
+            this.sex = sex;
+        }
+
+        @Override
+        public void addAttribute(String attr, String contents) {
 
         }
     }
 
-    private class Phone extends Attribute {
-        private String number;
+    private class Birth extends Event {
 
-        public Phone() {
-
-        }
+        public Birth() {}
     }
+
+    private class Baptism extends Event {
+        public Baptism() {}
+    }
+
+    private class Death extends Event {
+        public Death() {}
+    }
+
 
     private Name name; // can a person have more than one name?
-    private ArrayList<Address> addrs[]; // person may have more than one address
-    private ArrayList<Phone> phone[];
+    private Sex sex;
 
     private Attribute current_attribute;
+
+    public Individual() {
+
+    }
 
     public void newAttribute(String line_string){
         if (line_string.charAt(0) != 1)
         {
             throw new RuntimeException("This line does not add a new individual attribute");
         }
-        // edge case for SEX attribute
+        String attr;
+        String contents;
 
-        String attr = line_string.substring(2,6);
-        String contents = line_string.substring(7);
+        // edge case for SEX attribute, b/c its 3 chars, not 4 chars
+        if (line_string.substring(2,5).equals("SEX"))
+        {
+            attr = line_string.substring(2,5); // SEX
+            contents =  line_string.substring(6);
+            sex = new Sex(contents);
+            current_attribute = null;
+        }
+        else
+        {
+            attr = line_string.substring(2,6);
+            contents = line_string.substring(7);
 
-        System.out.println(attr);
+            if (attr.equals("NAME"))
+            {
+                name = new Name(contents);
+                current_attribute = name;
+            }
+
+        }
+
+
+        System.out.println(attr + " " + contents);
 
     }
 
@@ -111,6 +148,10 @@ public class Individual {
         if (line_string.charAt(0) != 2)
         {
             throw new RuntimeException("This line does not have the correct number for adding information correctly");
+        }
+        else if (current_attribute == null)
+        {
+            throw new RuntimeException("Error: No individual attribute has been chosen to update");
         }
 
         String attr = line_string.substring(2,6);
