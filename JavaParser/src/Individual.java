@@ -22,17 +22,16 @@
 
 import java.util.ArrayList;
 
-class Person {
+public class Individual {
     // Private classes are added for all the possible attributes for a person
 
-    private class PersonAttribute {
-        public void addAttribute(String attr, String contents){
+    private class Attribute {
+        public void addAttribute(String attr, String contents) {
 
         }
-
     }
 
-    private class Name extends PersonAttribute{
+    private class Name extends Attribute{
         private String first_name;
         private String middle_name;
         private String last_name;
@@ -51,9 +50,22 @@ class Person {
             this.middle_name = middle_name;
             this.last_name = last_name;
         }
+
+        public void addAttribute(String attr, String contents) {
+            if (attr.equals("SURN")) {
+                last_name = "contents";
+            }
+            else if (attr.equals("GIVN")) {
+                String[] split = contents.split(" ");
+                first_name = split[0];
+                if (split.length > 1){
+                    middle_name = split[1];
+                }
+            }
+        }
     }
 
-    private class Address extends PersonAttribute {
+    private class Address extends Attribute {
         private String addr_line1;
         // private String addr_line2;
         private String city;
@@ -67,7 +79,7 @@ class Person {
         }
     }
 
-    private class Phone extends PersonAttribute {
+    private class Phone extends Attribute {
         private String number;
 
         public Phone() {
@@ -79,7 +91,7 @@ class Person {
     private ArrayList<Address> addrs[]; // person may have more than one address
     private ArrayList<Phone> phone[];
 
-    private PersonAttribute current_attribute;
+    private Attribute current_attribute;
 
     public void newAttribute(String line_string){
         if (line_string.charAt(0) != 1)

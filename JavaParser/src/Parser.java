@@ -22,7 +22,7 @@
 
 import java.io.*;
 
-class Parser {
+public class Parser {
 
     public Parser() {
 
