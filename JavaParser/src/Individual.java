@@ -62,7 +62,7 @@ public class Individual {
         @Override
         public void addAttribute(@NotNull String attr, String contents) {
             if (attr.equals("SURN")) {
-                last_name = "contents";
+                last_name = contents;
             }
             else if (attr.equals("GIVN")) {
                 String[] split = contents.split(" ");
@@ -119,6 +119,19 @@ public class Individual {
         }
     }
 
+    private class Flag extends Attribute {
+        private String flag;
+
+        public Flag() {
+
+        }
+
+        @Override
+        public void addAttribute(@NotNull String line_string) {
+            flag = line_string.substring(11);
+        }
+    }
+
     private String id;
     private Name name; // can a person have more than one name?
     private Sex sex;
@@ -128,6 +141,7 @@ public class Individual {
     private Death death;
     private ArrayList<Spouse> spouses;
     private Child child; // can you belong to more than one family?
+    private Flag flag;
 
     private Attribute current_attribute;
 
@@ -153,6 +167,12 @@ public class Individual {
             contents =  line_string.substring(6);
             sex = new Sex(contents);
             current_attribute = null;
+        }
+        // edge case for _FLGS attribute
+        else if (line_string.contains("_FLGS")){
+            attr = line_string.substring(2,7);
+            flag = new Flag();
+            current_attribute = flag;
         }
         else
         {
@@ -188,10 +208,12 @@ public class Individual {
             {
                 Spouse new_spouse = new Spouse(contents);
                 spouses.add(new_spouse);
+                current_attribute = new_spouse;
             }
             else if (attr.equals("FAMC"))
             {
                 child = new Child(contents);
+                current_attribute = child;
             }
         }
 
@@ -207,6 +229,9 @@ public class Individual {
         else if (current_attribute == null)
         {
             throw new RuntimeException("Error: No individual attribute has been chosen to update");
+        }
+        else if (current_attribute instanceof Flag){
+            current_attribute.addAttribute(line_string);
         }
 
         String attr = line_string.substring(2,6);

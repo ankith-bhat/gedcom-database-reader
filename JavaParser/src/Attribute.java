@@ -26,8 +26,8 @@ public abstract class Attribute {
     public Attribute() {
     }
 
-    public void addAttribute(String attr, String contents){
+    public void addAttribute(String line_string){}
 
-    }
+    public void addAttribute(String attr, String contents){}
 
 }
