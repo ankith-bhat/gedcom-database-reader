@@ -26,6 +26,8 @@ public abstract class Attribute {
     public Attribute() {
     }
 
-    public abstract void addAttribute(String attr, String contents);
+    public void addAttribute(String attr, String contents){
+
+    }
 
 }

@@ -21,6 +21,7 @@
  */
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -40,6 +41,9 @@ public class Parser {
         String line_string;
         int line_num = 0;
 
+        ArrayList<Individual> individuals = new ArrayList<>();
+        Individual current_individual = null;
+
         // read line-by-line
         while ((line_string = file_buffer.readLine()) != null) {
             // edge case: first line has extra character
@@ -49,15 +53,23 @@ public class Parser {
                 }
                System.out.println("Head found");
             }
-
             else if (line_string.contains("0 TRLR")) {
                 System.out.println("Trailer found");
             }
-
             else
             {
                 if (line_string.charAt(0) == '0') {
                     System.out.println("New Entity");
+                    current_individual = new Individual(line_string);
+                    individuals.add(current_individual);
+                }
+                else if (line_string.charAt(0) == '1') {
+                    if (current_individual == null) continue;
+                    current_individual.newAttribute(line_string);
+                }
+                else if (line_string.charAt(0) == '2') {
+                    if (current_individual == null) continue;
+                    current_individual.addAttribute(line_string);
                 }
             }
 

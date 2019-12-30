@@ -80,11 +80,6 @@ public class Individual {
         public Sex(String sex) {
             this.sex = sex;
         }
-
-        @Override
-        public void addAttribute(String attr, String contents) {
-
-        }
     }
 
     private class Caste extends Attribute{
@@ -92,11 +87,6 @@ public class Individual {
 
         public Caste(String caste) {
             this.caste = caste;
-        }
-
-        @Override
-        public void addAttribute(String attr, String contents) {
-
         }
     }
 
@@ -113,27 +103,48 @@ public class Individual {
         public Death() {}
     }
 
+    private class Spouse extends Attribute {
+        private String family_id;
+
+        public Spouse(String family_id) {
+            this.family_id = family_id.replaceAll("@", "");;
+        }
+    }
+
+    private class Child extends Attribute {
+        private String family_id;
+
+        public Child(String family_id) {
+            this.family_id = family_id.replaceAll("@", "");
+        }
+    }
+
     private String id;
     private Name name; // can a person have more than one name?
     private Sex sex;
+    private Caste caste;
     private Birth birth;
     private Baptism baptism;
     private Death death;
-    private Caste caste;
+    private ArrayList<Spouse> spouses;
+    private Child child; // can you belong to more than one family?
 
     private Attribute current_attribute;
 
-    public Individual(String id) {
-        this.id = id.replaceAll("@", "");
+    public Individual(String line_string) {
+        String[] split = line_string.split(" ");
+        this.id = split[1].replaceAll("@", "");
+
+        spouses = new ArrayList<>();
     }
 
     public void newAttribute(String line_string){
-        if (line_string.charAt(0) != 1)
+        if (line_string.charAt(0) != '1')
         {
-            throw new RuntimeException("This line does not add a new individual attribute");
+            throw new RuntimeException("This line does not add a new individual attribute: " + line_string);
         }
         String attr;
-        String contents;
+        String contents = "";
 
         // edge case for SEX attribute, b/c its 3 chars, not 4 chars
         if (line_string.substring(2,5).equals("SEX"))
@@ -146,7 +157,7 @@ public class Individual {
         else
         {
             attr = line_string.substring(2,6);
-            contents = line_string.substring(7);
+            if (line_string.length() >= 8) contents = line_string.substring(7);
 
             if (attr.equals("NAME"))
             {
@@ -173,6 +184,15 @@ public class Individual {
                 death = new Death();
                 current_attribute = death;
             }
+            else if (attr.equals("FAMS"))
+            {
+                Spouse new_spouse = new Spouse(contents);
+                spouses.add(new_spouse);
+            }
+            else if (attr.equals("FAMC"))
+            {
+                child = new Child(contents);
+            }
         }
 
         System.out.println(attr + " " + contents);
@@ -180,9 +200,9 @@ public class Individual {
     }
 
     public void addAttribute(String line_string){
-        if (line_string.charAt(0) != 2)
+        if (line_string.charAt(0) !=  '2')
         {
-            throw new RuntimeException("This line does not have the correct number for adding information correctly");
+            throw new RuntimeException("This line does not have the correct number for adding information correctly: " + line_string);
         }
         else if (current_attribute == null)
         {
