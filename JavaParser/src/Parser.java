@@ -43,8 +43,8 @@ public class Parser {
 
         ArrayList<Individual> individuals = new ArrayList<>();
         Individual current_individual = null;
-        boolean indi = false;
-        boolean fam = false;
+        boolean adding_indi = false;
+        boolean adding_fam = false;
 
         // read line-by-line
         while ((line_string = file_buffer.readLine()) != null) {
@@ -64,20 +64,20 @@ public class Parser {
                     System.out.println("New Entity");
                     current_individual = new Individual(line_string);
                     individuals.add(current_individual);
-                    indi = true;
-                    fam = false;
+                    adding_indi = true;
+                    adding_fam = false;
                 }
-                else if (line_string.charAt(0) == '1' && indi) {
+                else if (line_string.charAt(0) == '1' && adding_indi) {
                     if (current_individual == null) continue;
                     current_individual.newAttribute(line_string);
                 }
-                else if (line_string.charAt(0) == '2'&& indi) {
+                else if (line_string.charAt(0) == '2'&& adding_indi) {
                     if (current_individual == null) continue;
                     current_individual.addAttribute(line_string);
                 }
                 else if (line_string.contains("FAM")){
-                    indi = false;
-                    fam = true;
+                    adding_indi = false;
+                    adding_fam = true;
                 }
             }
 
@@ -85,6 +85,12 @@ public class Parser {
             line_num++;
         }
 
+        for (Individual individual : individuals){
+            System.out.println(individual.toString());
+
+        }
+
         System.out.println("Program Completed");
+
     }
 }

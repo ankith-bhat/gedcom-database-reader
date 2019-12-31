@@ -34,7 +34,7 @@ public class Individual {
         private String middle_name;
         private String last_name;
 
-        public Name() {
+        public Name(){
 
         }
 
@@ -50,8 +50,13 @@ public class Individual {
             }
             else {
                 first_name = split[0];
-                for (int i = 1; i < split.length - 2; i++)
+                for (int i = 1; i < split.length - 1; i++)
                 {
+                    if (middle_name == null){
+                        middle_name = split[i];
+                        continue;
+                    }
+
                     if (i != 1) middle_name += " ";
                     middle_name+= split[i];
                 }
@@ -240,6 +245,16 @@ public class Individual {
         current_attribute.addAttribute(attr, contents);
     }
 
+    @Override
+    public String toString(){
+        if (name == null) return "";
+        StringBuilder name_string = new StringBuilder();
 
+        if (name.first_name != null) name_string.append(name.first_name + " ");
+        if (name.middle_name != null) name_string.append(name.middle_name + " ");
+        if (name.last_name != null) name_string.append(name.last_name);
+
+        return name_string.toString();
+    }
 
 }
