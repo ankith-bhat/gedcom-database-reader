@@ -5,4 +5,3 @@ Created by Ankith Bhat and Amith Bhat
 
 Assumptions:
 - The GEDCOM file follows a linked-lineage structure
-- etc
