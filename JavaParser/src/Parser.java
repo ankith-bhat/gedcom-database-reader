@@ -90,13 +90,13 @@ public class Parser {
                 }
                 else if (line_string.charAt(0) == '1' && adding_fam) {
                     if (current_family == null){
-                        throw new RuntimeException("Invalid individual to add attribute to");
+                        throw new RuntimeException("Invalid family to add attribute to");
                     }
                     current_family.newAttribute(line_string);
                 }
                 else if (line_string.charAt(0) == '2'&& adding_fam) {
                     if (current_family == null){
-                        throw new RuntimeException("Invalid individual to add attribute to");
+                        throw new RuntimeException("Invalid family to add attribute to");
                     }
                     current_family.addAttribute(line_string);
                 }
