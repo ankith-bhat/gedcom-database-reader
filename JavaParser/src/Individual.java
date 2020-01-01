@@ -20,7 +20,6 @@
  * SOFTWARE.
  */
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,7 +64,7 @@ public class Individual {
         }
 
         @Override
-        public void addAttribute(@NotNull String attr, String contents) {
+        public void addAttribute(String attr, String contents) {
             if (attr.equals("SURN")) {
                 last_name = contents;
             }
@@ -132,7 +131,7 @@ public class Individual {
         }
 
         @Override
-        public void addAttribute(@NotNull String line_string) {
+        public void addAttribute(String line_string) {
             flag = line_string.substring(11);
         }
     }

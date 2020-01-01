@@ -21,7 +21,7 @@
  */
 
 public class Event extends Attribute {
-    private Place place;
+    private String place;
     private String date;
 
     public Event() {
@@ -32,7 +32,7 @@ public class Event extends Attribute {
     public void addAttribute(String attr, String contents) {
         if (attr.equals("PLAC"))
         {
-            place = new Place(contents);
+            place = contents;
         }
         else if (attr.equals("Date"));
         {
