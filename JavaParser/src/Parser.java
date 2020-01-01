@@ -42,7 +42,9 @@ public class Parser {
         int line_num = 0;
 
         ArrayList<Individual> individuals = new ArrayList<>();
+        ArrayList<Family> families = new ArrayList<>();
         Individual current_individual = null;
+        Family current_family = null;
         boolean adding_indi = false;
         boolean adding_fam = false;
 
@@ -61,7 +63,7 @@ public class Parser {
             else
             {
                 if (line_string.charAt(0) == '0' && line_string.contains("INDI")) {
-                    System.out.println("New Entity");
+                    System.out.println("New Individual");
                     current_individual = new Individual(line_string);
                     individuals.add(current_individual);
                     adding_indi = true;
@@ -79,9 +81,24 @@ public class Parser {
                     }
                     current_individual.addAttribute(line_string);
                 }
-                else if (line_string.contains("FAM")){
+                else if (line_string.charAt(0) == '0' && line_string.contains("FAM")) {
+                    System.out.println("New Family");
+                    current_family = new Family(line_string);
+                    families.add(current_family);
                     adding_indi = false;
                     adding_fam = true;
+                }
+                else if (line_string.charAt(0) == '1' && adding_fam) {
+                    if (current_family == null){
+                        throw new RuntimeException("Invalid individual to add attribute to");
+                    }
+                    current_family.newAttribute(line_string);
+                }
+                else if (line_string.charAt(0) == '2'&& adding_fam) {
+                    if (current_family == null){
+                        throw new RuntimeException("Invalid individual to add attribute to");
+                    }
+                    current_family.addAttribute(line_string);
                 }
             }
 
@@ -91,7 +108,9 @@ public class Parser {
 
         for (Individual individual : individuals){
             System.out.println(individual.toString());
-
+        }
+        for (Family family : families){
+            System.out.println(family.toString());
         }
 
         System.out.println("Program Completed");

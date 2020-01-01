@@ -34,7 +34,7 @@ public class Event extends Attribute {
         {
             place = contents;
         }
-        else if (attr.equals("Date"));
+        else if (attr.equals("DATE"));
         {
             date = contents;
         }
