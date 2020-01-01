@@ -36,9 +36,7 @@ public class Family {
     private String spouse2_id; // Wife
     private Marriage marriage;
     private Divorce divorce;
-
     private ArrayList<String> children_id;
-
     private Attribute current_attribute;
 
 
