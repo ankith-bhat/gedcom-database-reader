@@ -68,11 +68,15 @@ public class Parser {
                     adding_fam = false;
                 }
                 else if (line_string.charAt(0) == '1' && adding_indi) {
-                    if (current_individual == null) continue;
+                    if (current_individual == null){
+                        throw new RuntimeException("Invalid individual to add attribute to");
+                    }
                     current_individual.newAttribute(line_string);
                 }
                 else if (line_string.charAt(0) == '2'&& adding_indi) {
-                    if (current_individual == null) continue;
+                    if (current_individual == null){
+                        throw new RuntimeException("Invalid individual to add attribute to");
+                    }
                     current_individual.addAttribute(line_string);
                 }
                 else if (line_string.contains("FAM")){
