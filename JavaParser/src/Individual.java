@@ -221,8 +221,6 @@ public class Individual {
             }
         }
 
-        System.out.println(attr + " " + contents);
-
     }
 
     public void addAttribute(String line_string){
