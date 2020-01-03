@@ -113,6 +113,10 @@ public class Parser {
             System.out.println(family.toString());
         }
 
+        for (Individual individual : individuals){
+            System.out.println(individual.getQuery());
+        }
+
         System.out.println("Program Completed");
 
     }

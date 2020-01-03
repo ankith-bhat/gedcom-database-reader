@@ -63,6 +63,16 @@ public class Individual {
             }
         }
 
+        public boolean hasFirstName(){
+            return first_name != null;
+        }
+        public boolean hasMiddleName(){
+            return middle_name != null;
+        }
+        public boolean hasLastName(){
+            return last_name != null;
+        }
+
         @Override
         public void addAttribute(String attr, String contents) {
             if (attr.equals("SURN")) {
@@ -240,6 +250,54 @@ public class Individual {
         String contents = line_string.substring(7);
 
         current_attribute.addAttribute(attr, contents);
+    }
+
+    public String getQuery(){
+        StringBuilder query_command = new StringBuilder(100);
+        StringBuilder query_values = new StringBuilder(100);
+
+        // Example Query
+        // INSERT INTO INDIVIDUALS (Id, FirstName, LastName) VALUES (12, Ankith, Bhat)
+
+        query_command.append("INSERT INTO INDIVIDUALS (id");
+        query_values.append("VALUES (" + id);
+
+        if (name != null){
+            if (name.hasFirstName()) {
+                query_command.append(", FirstName");
+                query_values.append(", " + name.first_name);
+            }
+            if (name.hasMiddleName()) {
+                query_command.append(", MiddleName");
+                query_values.append(", " + name.middle_name);
+            }
+            if (name.hasLastName()) {
+                query_command.append(", LastName");
+                query_values.append(", " + name.last_name);
+            }
+        }
+        if (sex != null){
+            query_command.append(", Sex");
+            query_values.append(", " + sex.sex);
+        }
+        if (caste != null){
+            query_command.append(", Caste");
+            query_values.append(", " + caste.caste);
+        }
+
+//        private Sex sex; // done
+//        private Caste caste; // done
+//        private Birth birth;
+//        private Baptism baptism;
+//        private Death death;
+//        private ArrayList<Spouse> spouses;
+//        private Child child; // can you belong to more than one family?
+//        private Flag flag;
+
+        query_command.append(") ");
+        query_values.append(")");
+
+        return query_command.toString() + query_values.toString();
     }
 
     @Override
