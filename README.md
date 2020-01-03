@@ -8,6 +8,7 @@ Assumptions:
 - The GEDCOM file follows a linked-lineage structure
 
 The following things need to be installed and setup:
+-
 - Java with JRE 11 or more recent version:
 - MySQL JDBC Driver:
 https://dev.mysql.com/downloads/connector/j/
