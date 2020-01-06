@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ankith Bhat, Amith Bhat
+ * Copyright (c) 2019, 2020 Ankith Bhat, Amith Bhat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
  */
 
 public class Event extends Attribute {
-    private Place place;
+    private String place;
     private String date;
 
     public Event() {
@@ -32,9 +32,9 @@ public class Event extends Attribute {
     public void addAttribute(String attr, String contents) {
         if (attr.equals("PLAC"))
         {
-            place = new Place(contents);
+            place = contents;
         }
-        else if (attr.equals("Date"));
+        else if (attr.equals("DATE"));
         {
             date = contents;
         }

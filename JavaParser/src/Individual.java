@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ankith Bhat, Amith Bhat
+ * Copyright (c) 2019, 2020 Ankith Bhat, Amith Bhat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,11 +20,8 @@
  * SOFTWARE.
  */
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Individual {
     // Private classes are added for all the possible attributes for a person
@@ -64,8 +61,18 @@ public class Individual {
             }
         }
 
+        public boolean hasFirstName(){
+            return first_name != null;
+        }
+        public boolean hasMiddleName(){
+            return middle_name != null;
+        }
+        public boolean hasLastName(){
+            return last_name != null;
+        }
+
         @Override
-        public void addAttribute(@NotNull String attr, String contents) {
+        public void addAttribute(String attr, String contents) {
             if (attr.equals("SURN")) {
                 last_name = contents;
             }
@@ -132,7 +139,7 @@ public class Individual {
         }
 
         @Override
-        public void addAttribute(@NotNull String line_string) {
+        public void addAttribute(String line_string) {
             flag = line_string.substring(11);
         }
     }
@@ -222,8 +229,6 @@ public class Individual {
             }
         }
 
-        System.out.println(attr + " " + contents);
-
     }
 
     public void addAttribute(String line_string){
@@ -243,6 +248,69 @@ public class Individual {
         String contents = line_string.substring(7);
 
         current_attribute.addAttribute(attr, contents);
+    }
+
+    public String getMainQuery(){
+        StringBuilder query_command = new StringBuilder(100);
+        StringBuilder query_values = new StringBuilder(100);
+
+        // Example Query
+        // INSERT INTO Individuals (Id, FirstName, LastName) VALUES (12, Ankith, Bhat)
+
+        query_command.append("INSERT INTO Individuals (id");
+        query_values.append("VALUES (" + id);
+
+        if (name != null){
+            if (name.hasFirstName()) {
+                query_command.append(", FirstName");
+                query_values.append(", " + name.first_name);
+            }
+            if (name.hasMiddleName()) {
+                query_command.append(", MiddleName");
+                query_values.append(", " + name.middle_name);
+            }
+            if (name.hasLastName()) {
+                query_command.append(", LastName");
+                query_values.append(", " + name.last_name);
+            }
+        }
+        if (sex != null){
+            query_command.append(", Sex");
+            query_values.append(", " + sex.sex);
+        }
+
+        query_command.append(") ");
+        query_values.append(");");
+
+        return query_command.toString() + query_values.toString();
+    }
+
+    public String[] getQueries(){
+
+        ArrayList<String> queries = new ArrayList<>();
+        queries.add(getMainQuery());
+
+        // Example Query
+        // INSERT INTO Individuals (Id, Fact, value1) VALUES (12, BIRT, 01/01/2000)
+
+        if (caste != null){
+            String query = "INSERT INTO FactsEvents (id, CAST, value1) VALUES (" + id + ", " + caste.caste + ");";
+            queries.add(query);
+        }
+        if (birth != null){
+
+        }
+
+
+//        private Caste caste; // done
+//        private Birth birth;
+//        private Baptism baptism;
+//        private Death death;
+//        private ArrayList<Spouse> spouses;
+//        private Child child;
+//        private Flag flag;
+
+        return queries.toArray(new String[queries.size()]);
     }
 
     @Override
