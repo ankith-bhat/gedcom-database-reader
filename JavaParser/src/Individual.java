@@ -250,14 +250,14 @@ public class Individual {
         current_attribute.addAttribute(attr, contents);
     }
 
-    public String getQuery(){
+    public String getMainQuery(){
         StringBuilder query_command = new StringBuilder(100);
         StringBuilder query_values = new StringBuilder(100);
 
         // Example Query
-        // INSERT INTO INDIVIDUALS (Id, FirstName, LastName) VALUES (12, Ankith, Bhat)
+        // INSERT INTO Individuals (Id, FirstName, LastName) VALUES (12, Ankith, Bhat)
 
-        query_command.append("INSERT INTO INDIVIDUALS (id");
+        query_command.append("INSERT INTO Individuals (id");
         query_values.append("VALUES (" + id);
 
         if (name != null){
@@ -296,6 +296,26 @@ public class Individual {
         query_values.append(")");
 
         return query_command.toString() + query_values.toString();
+    }
+
+    public String[] getQueries(){
+
+        ArrayList<String> queries = new ArrayList<>();
+        queries.add(getMainQuery());
+
+        // Example Query
+        // INSERT INTO Individuals (Id, Fact, value1) VALUES (12, BIRT, 01/01/2000)
+
+
+        if (caste != null){
+            String query = "INSERT INTO FactsEvents (id, CAST, value1) VALUES (" + id + ", " + caste.caste + ")";
+            queries.add(query);
+        }
+        if (birth != null){
+
+        }
+
+        return queries.toArray(new String[queries.size()]);
     }
 
     @Override

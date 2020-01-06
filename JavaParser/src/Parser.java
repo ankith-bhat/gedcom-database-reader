@@ -114,7 +114,10 @@ public class Parser {
         }
 
         for (Individual individual : individuals){
-            System.out.println(individual.getQuery());
+            String[] queries = individual.getQueries();
+            for (String query: queries){
+                System.out.println(query);
+            }
         }
 
         System.out.println("Program Completed");
