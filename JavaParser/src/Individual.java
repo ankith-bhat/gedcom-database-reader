@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ankith Bhat, Amith Bhat
+ * Copyright (c) 2019, 2020 Ankith Bhat, Amith Bhat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,6 @@
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Individual {
     // Private classes are added for all the possible attributes for a person
