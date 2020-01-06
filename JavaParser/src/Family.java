@@ -103,6 +103,23 @@ public class Family {
         current_attribute.addAttribute(attr, contents);
     }
 
+    public String [] getQueries(){
+        ArrayList<String> queries = new ArrayList<>();
+
+
+        String spouse_query = "INSERT INTO FamilySpouse VALUES (" + family_id + ", " + spouse1_id + ", " + spouse2_id + ");";
+        queries.add(spouse_query);
+
+        int child_order = 1;
+        for (String child_id : children_id){
+            String child_query = "INSERT INTO FamilyChild VALUES (" + family_id + ", " + child_id + ", " + child_order + ");";
+            queries.add(child_query);
+            child_order++;
+        }
+
+        return queries.toArray(new String[queries.size()]);
+    }
+
     @Override
     public String toString(){
         StringBuilder family_string = new StringBuilder();

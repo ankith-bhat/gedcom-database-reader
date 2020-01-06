@@ -278,22 +278,9 @@ public class Individual {
             query_command.append(", Sex");
             query_values.append(", " + sex.sex);
         }
-        if (caste != null){
-            query_command.append(", Caste");
-            query_values.append(", " + caste.caste);
-        }
-
-//        private Sex sex; // done
-//        private Caste caste; // done
-//        private Birth birth;
-//        private Baptism baptism;
-//        private Death death;
-//        private ArrayList<Spouse> spouses;
-//        private Child child; // can you belong to more than one family?
-//        private Flag flag;
 
         query_command.append(") ");
-        query_values.append(")");
+        query_values.append(");");
 
         return query_command.toString() + query_values.toString();
     }
@@ -306,14 +293,22 @@ public class Individual {
         // Example Query
         // INSERT INTO Individuals (Id, Fact, value1) VALUES (12, BIRT, 01/01/2000)
 
-
         if (caste != null){
-            String query = "INSERT INTO FactsEvents (id, CAST, value1) VALUES (" + id + ", " + caste.caste + ")";
+            String query = "INSERT INTO FactsEvents (id, CAST, value1) VALUES (" + id + ", " + caste.caste + ");";
             queries.add(query);
         }
         if (birth != null){
 
         }
+
+
+//        private Caste caste; // done
+//        private Birth birth;
+//        private Baptism baptism;
+//        private Death death;
+//        private ArrayList<Spouse> spouses;
+//        private Child child;
+//        private Flag flag;
 
         return queries.toArray(new String[queries.size()]);
     }

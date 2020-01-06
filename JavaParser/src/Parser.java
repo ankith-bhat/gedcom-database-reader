@@ -120,6 +120,13 @@ public class Parser {
             }
         }
 
+        for (Family family : families){
+            String[] queries = family.getQueries();
+            for (String query: queries){
+                System.out.println(query);
+            }
+        }
+
         System.out.println("Program Completed");
 
     }
