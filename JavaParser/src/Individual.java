@@ -67,9 +67,7 @@ public class Individual {
         public boolean hasMiddleName(){
             return middle_name != null;
         }
-        public boolean hasLastName(){
-            return last_name != null;
-        }
+        public boolean hasLastName(){ return last_name != null && last_name.matches(".*[a-zA-Z]+.*"); }
 
         @Override
         public void addAttribute(String attr, String contents) {
