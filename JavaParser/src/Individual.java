@@ -341,6 +341,7 @@ public class Individual {
 //        private ArrayList<Spouse> spouses;
 //        private Child child;
 //        private Flag flag; //ignored (as per README)
+        
 
         return queries.toArray(new String[queries.size()]);
     }
