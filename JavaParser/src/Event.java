@@ -40,4 +40,12 @@ public class Event extends Attribute {
         }
 
     }
+
+    public String getPlace(){
+        return place;
+    }
+
+    public String getDate(){
+        return date;
+    }
 }

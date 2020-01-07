@@ -67,9 +67,7 @@ public class Individual {
         public boolean hasMiddleName(){
             return middle_name != null;
         }
-        public boolean hasLastName(){
-            return last_name != null;
-        }
+        public boolean hasLastName(){ return last_name != null && last_name.matches(".*[a-zA-Z]+.*"); }
 
         @Override
         public void addAttribute(String attr, String contents) {
@@ -278,13 +276,40 @@ public class Individual {
             query_command.append(", Sex");
             query_values.append(", " + sex.sex);
         }
-
+        if (caste != null){
+            query_command.append(", Caste");
+            query_values.append(", " + caste.caste);
+        }
         query_command.append(") ");
         query_values.append(");");
 
         return query_command.toString() + query_values.toString();
     }
 
+    public String queryHelper(String queryType, Event e) {
+        if (e != null) {
+            StringBuilder event_query_command = new StringBuilder(100);
+            StringBuilder event_query_values = new StringBuilder(100);
+
+            event_query_command.append("INSERT INTO FactsEvents (id, EventTag");
+            event_query_values.append("VALUES (" + id + ", " + queryType);
+
+            if (e.getPlace() != null) {
+                event_query_command.append(", Place");
+                event_query_values.append(", " + e.getPlace());
+            }
+            if (e.getDate() != null) {
+                event_query_command.append(", Date");
+                event_query_values.append(", " + e.getDate());
+            }
+
+            event_query_command.append(") ");
+            event_query_values.append(");");
+
+            return event_query_command.toString() + event_query_values.toString();
+        }
+        return null;
+    }
     public String[] getQueries(){
 
         ArrayList<String> queries = new ArrayList<>();
@@ -293,22 +318,29 @@ public class Individual {
         // Example Query
         // INSERT INTO Individuals (Id, Fact, value1) VALUES (12, BIRT, 01/01/2000)
 
-        if (caste != null){
-            String query = "INSERT INTO FactsEvents (id, CAST, value1) VALUES (" + id + ", " + caste.caste + ");";
-            queries.add(query);
-        }
-        if (birth != null){
+        //Put Caste in main query instead (goes to INDIVIDUALS)
 
+        //Birth, Baptism, and Death treated the same
+        if (birth != null) {
+            queries.add(queryHelper("BIRT", birth));
         }
+        if (baptism != null){
+            queries.add(queryHelper("BAPT", baptism));
+        }
+        if (death != null){
+            queries.add(queryHelper("DEAT", death));;
+        }
+
+
 
 
 //        private Caste caste; // done
-//        private Birth birth;
-//        private Baptism baptism;
-//        private Death death;
+//        private Birth birth; //done
+//        private Baptism baptism; //done
+//        private Death death; //done
 //        private ArrayList<Spouse> spouses;
 //        private Child child;
-//        private Flag flag;
+//        private Flag flag; //ignored (as per README)
 
         return queries.toArray(new String[queries.size()]);
     }
