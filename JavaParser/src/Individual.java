@@ -288,27 +288,29 @@ public class Individual {
         return query_command.toString() + query_values.toString();
     }
 
-    public String queryHelper(String queryType, Event e){
-        if (e != null){
+    public String queryHelper(String queryType, Event e) {
+        if (e != null) {
             StringBuilder event_query_command = new StringBuilder(100);
             StringBuilder event_query_values = new StringBuilder(100);
 
             event_query_command.append("INSERT INTO FactsEvents (id, EventTag");
             event_query_values.append("VALUES (" + id + ", " + queryType);
 
-            if (e.getPlace() != null){
+            if (e.getPlace() != null) {
                 event_query_command.append(", Place");
-                event_query_values.append(", " + birth.getPlace());
+                event_query_values.append(", " + e.getPlace());
             }
-            if (birth.getDate() != null){
+            if (e.getDate() != null) {
                 event_query_command.append(", Date");
-                event_query_values.append(", " + birth.getDate());
+                event_query_values.append(", " + e.getDate());
             }
 
             event_query_command.append(") ");
             event_query_values.append(");");
 
             return event_query_command.toString() + event_query_values.toString();
+        }
+        return null;
     }
     public String[] getQueries(){
 
