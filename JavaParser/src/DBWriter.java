@@ -66,17 +66,14 @@ public class DBWriter {
             // todo print success?
         }
         catch (SQLException ex){
-            // handle any errors
+            // error handling
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
             result = false;
         }
         finally {
-            // it is a good idea to release
-            // resources in a finally{} block
-            // in reverse-order of their creation
-            // if they are no-longer needed
+            // release resources
 
             if (rs != null) {
                 try {
@@ -94,7 +91,6 @@ public class DBWriter {
                 stmt = null;
             }
         }
-
 
         return result;
     }
