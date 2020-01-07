@@ -278,7 +278,10 @@ public class Individual {
             query_command.append(", Sex");
             query_values.append(", " + sex.sex);
         }
-
+        if (caste != null){
+            query_command.append(", Caste");
+            query_values.append(", " + caste.caste);
+        }
         query_command.append(") ");
         query_values.append(");");
 
@@ -293,10 +296,11 @@ public class Individual {
         // Example Query
         // INSERT INTO Individuals (Id, Fact, value1) VALUES (12, BIRT, 01/01/2000)
 
-        if (caste != null){
+        //Put Caste in main query instead (goes to INDIVIDUALS)
+        /*if (caste != null){
             String query = "INSERT INTO FactsEvents (id, CAST, value1) VALUES (" + id + ", " + caste.caste + ");";
             queries.add(query);
-        }
+        }*/
         if (birth != null){
 
         }
