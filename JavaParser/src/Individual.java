@@ -288,6 +288,28 @@ public class Individual {
         return query_command.toString() + query_values.toString();
     }
 
+    public String queryHelper(String queryType, Event e){
+        if (e != null){
+            StringBuilder event_query_command = new StringBuilder(100);
+            StringBuilder event_query_values = new StringBuilder(100);
+
+            event_query_command.append("INSERT INTO FactsEvents (id, EventTag");
+            event_query_values.append("VALUES (" + id + ", " + queryType);
+
+            if (e.getPlace() != null){
+                event_query_command.append(", Place");
+                event_query_values.append(", " + birth.getPlace());
+            }
+            if (birth.getDate() != null){
+                event_query_command.append(", Date");
+                event_query_values.append(", " + birth.getDate());
+            }
+
+            event_query_command.append(") ");
+            event_query_values.append(");");
+
+            return event_query_command.toString() + event_query_values.toString();
+    }
     public String[] getQueries(){
 
         ArrayList<String> queries = new ArrayList<>();
@@ -300,31 +322,21 @@ public class Individual {
 
         //Birth, Baptism, and Death treated the same
         if (birth != null) {
-            StringBuilder birth_query_command = new StringBuilder(100);
-            StringBuilder birth_query_values = new StringBuilder(100);
-
-            birth_query_command.append("INSERT INTO FactsEvents (id, EventTag");
-            birth_query_values.append("VALUES (" + id + ", BIRT");
-
-            if (birth.getPlace() != null){
-                birth_query_command.append(", Place");
-                birth_query_values.append(", " + birth.getPlace());
-            }
-            if (birth.getDate() != null){
-                birth_query_command.append(", Date");
-                birth_query_values.append(", " + birth.getDate());
-            }
-            birth_query_command.append(") ");
-            birth_query_values.append(");");
-
-            queries.add(birth_query_command.toString() + birth_query_values.toString());
+            queries.add(queryHelper("BIRT", birth));
+        }
+        if (baptism != null){
+            queries.add(queryHelper("BAPT", baptism));
+        }
+        if (death != null){
+            queries.add(queryHelper("DEAT", death));;
         }
 
 
+
 //        private Caste caste; // done
-//        private Birth birth;
-//        private Baptism baptism;
-//        private Death death;
+//        private Birth birth; //done
+//        private Baptism baptism; //done
+//        private Death death; //done
 //        private ArrayList<Spouse> spouses;
 //        private Child child;
 //        private Flag flag;
