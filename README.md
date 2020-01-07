@@ -5,6 +5,7 @@ Created by Ankith Bhat and Amith Bhat
 
 Assumptions:
 - The GEDCOM file follows a linked-lineage structure
+- Custom attributes (e.g. FLGS) are ignored
 
 The following things need to be installed and setup:
 -

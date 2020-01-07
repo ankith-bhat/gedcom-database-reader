@@ -335,13 +335,14 @@ public class Individual {
 
 
 
+
 //        private Caste caste; // done
 //        private Birth birth; //done
 //        private Baptism baptism; //done
 //        private Death death; //done
 //        private ArrayList<Spouse> spouses;
 //        private Child child;
-//        private Flag flag;
+//        private Flag flag; //ignored (as per README)
 
         return queries.toArray(new String[queries.size()]);
     }
