@@ -297,12 +297,27 @@ public class Individual {
         // INSERT INTO Individuals (Id, Fact, value1) VALUES (12, BIRT, 01/01/2000)
 
         //Put Caste in main query instead (goes to INDIVIDUALS)
-        /*if (caste != null){
-            String query = "INSERT INTO FactsEvents (id, CAST, value1) VALUES (" + id + ", " + caste.caste + ");";
-            queries.add(query);
-        }*/
-        if (birth != null){
 
+        //Birth, Baptism, and Death treated the same
+        if (birth != null) {
+            StringBuilder birth_query_command = new StringBuilder(100);
+            StringBuilder birth_query_values = new StringBuilder(100);
+
+            birth_query_command.append("INSERT INTO FactsEvents (id, EventTag");
+            birth_query_values.append("VALUES (" + id + ", BIRT");
+
+            if (birth.getPlace() != null){
+                birth_query_command.append(", Place");
+                birth_query_values.append(", " + birth.getPlace());
+            }
+            if (birth.getDate() != null){
+                birth_query_command.append(", Date");
+                birth_query_values.append(", " + birth.getDate());
+            }
+            birth_query_command.append(") ");
+            birth_query_values.append(");");
+
+            queries.add(birth_query_command.toString() + birth_query_values.toString());
         }
 
 
