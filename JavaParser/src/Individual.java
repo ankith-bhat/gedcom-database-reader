@@ -253,9 +253,9 @@ public class Individual {
         StringBuilder query_values = new StringBuilder(100);
 
         // Example Query
-        // INSERT INTO Individuals (Id, FirstName, LastName) VALUES (12, Ankith, Bhat)
+        // INSERT INTO Individuals (ID, FirstName, LastName) VALUES (12, Ankith, Bhat)
 
-        query_command.append("INSERT INTO Individuals (id");
+        query_command.append("INSERT INTO Individuals (ID");
         query_values.append("VALUES (" + id);
 
         if (name != null){
@@ -291,7 +291,7 @@ public class Individual {
             StringBuilder event_query_command = new StringBuilder(100);
             StringBuilder event_query_values = new StringBuilder(100);
 
-            event_query_command.append("INSERT INTO FactsEvents (id, EventTag");
+            event_query_command.append("INSERT INTO IndividualEvents (ID, EventTag");
             event_query_values.append("VALUES (" + id + ", " + queryType);
 
             if (e.getPlace() != null) {
@@ -341,6 +341,7 @@ public class Individual {
 //        private ArrayList<Spouse> spouses;
 //        private Child child;
 //        private Flag flag; //ignored (as per README)
+        
 
         return queries.toArray(new String[queries.size()]);
     }

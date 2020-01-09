@@ -31,6 +31,52 @@ public class DBWriter {
     Statement stmt;
     ResultSet rs;
 
+    private final String create_individuals="CREATE TABLE Individuals ("
+            + "ID VARCHAR(10) NOT NULL,"
+            + "FirstName VARCHAR(45),"
+            + "MiddleName VARCHAR(45),"
+            + "LastName VARCHAR(45),"
+            + "Sex CHAR(1),"
+            + "Caste VARCHAR(15),"
+            + "PRIMARY KEY (ID)"
+            + ");";
+
+    private final String create_individuals_events = "CREATE TABLE IndividualEvents ("
+            + "ID VARCHAR(10) NOT NULL,"
+            + "EventTag VARCHAR(45) NOT NULL,"
+            + "Place CHAR(1),"
+            + "Date VARCHAR(15),"
+            + "PRIMARY KEY (ID, EventTag),"
+            + "FOREIGN KEY (ID) REFERENCES Individuals(ID)"
+            + ");";
+
+    private final String create_family_spouse = "CREATE TABLE FamilySpouse ("
+            + "FamilyID VARCHAR(10) NOT NULL,"
+            + "Spouse1ID VARCHAR(10) NOT NULL,"
+            + "Spouse2ID VARCHAR(10) NOT NULL,"
+            + "PRIMARY KEY (FamilyID),"
+            + "FOREIGN KEY (Spouse1ID) REFERENCES Individuals(ID),"
+            + "FOREIGN KEY (Spouse2ID) REFERENCES Individuals(ID)"
+            + ");";
+
+    private final String create_family_child = "CREATE TABLE FamilyChild ("
+            + "FamilyID VARCHAR(10) NOT NULL,"
+            + "ChildID VARCHAR(10) NOT NULL,"
+            + "ChildOrder INT NOT NULL,"
+            + "PRIMARY KEY (FamilyID, ChildID),"
+            + "FOREIGN KEY (FamilyID) REFERENCES FamilySpouse(FamilyID),"
+            + "FOREIGN KEY (ChildID) REFERENCES Individuals(ID)"
+            + ");";
+
+    private final String create_family_event = "CREATE TABLE FamilyEvents ("
+            + "FamilyID VARCHAR(10) NOT NULL,"
+            + "EventTag VARCHAR(45) NOT NULL,"
+            + "Place CHAR(1),"
+            + "Date VARCHAR(15),"
+            + "PRIMARY KEY (FamilyID, EventTag),"
+            + "FOREIGN KEY (FamilyID) REFERENCES FamilySpouse(ID)"
+            + ");";
+
 
     public DBWriter(String user, String password) {
         // Attempt connection
@@ -48,7 +94,19 @@ public class DBWriter {
 
         stmt = null;
         rs = null;
+
+        // should we also drop all existing tables?
+        // createTables();
     }
+
+    private void createTables(){
+        executeQuery(create_individuals);
+        executeQuery(create_individuals_events);
+        executeQuery(create_family_spouse);
+        executeQuery(create_family_child);
+        executeQuery(create_family_event);
+    }
+
 
     public boolean executeQuery(String query){
 

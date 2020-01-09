@@ -31,6 +31,7 @@ public class Parser {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Program Start");
+        System.out.println("Parsing...");
 
         File file = new File("../samples/gedcom_sample_file.GED");
 
@@ -113,10 +114,18 @@ public class Parser {
             System.out.println(family.toString());
         }
 
+        System.out.println("Writing to Database...");
+
+        String user = "user";
+        String password = "password";
+
+        DBWriter writer = new DBWriter(user, password);
+
         for (Individual individual : individuals){
             String[] queries = individual.getQueries();
             for (String query: queries){
                 System.out.println(query);
+                // writer.executeQuery(query);
             }
         }
 
@@ -124,6 +133,7 @@ public class Parser {
             String[] queries = family.getQueries();
             for (String query: queries){
                 System.out.println(query);
+                // writer.executeQuery(query);
             }
         }
 
