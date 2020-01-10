@@ -23,21 +23,18 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Parser {
 
-    public static void parser(String[] args) throws IOException {
+    public static void parser(String[] args) throws Exception {
         System.out.println("Parsing file...");
 
-        // todo File file = new File(args[1]);
+        // todo replace w/ File file = new File(args[1]);
         File file = new File("../samples/gedcom_sample_file.GED");
 
-        // todo try-catch
         BufferedReader file_buffer = new BufferedReader(new FileReader(file));
 
-        // todo try-catch
         String line_string;
         int line_num = 0;
 

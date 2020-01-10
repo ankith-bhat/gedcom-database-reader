@@ -20,13 +20,11 @@
  * SOFTWARE.
  */
 
-import java.io.*;
-import java.util.ArrayList;
 
 public class Driver {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         System.out.println("Program Start");
         String error_message = "Only create, drop, and parse [file] commands accepted";
 
@@ -59,7 +57,7 @@ public class Driver {
         {
             throw new IllegalArgumentException(error_message);
         }
-        
+
         System.out.println("Program Completed");
 
     }
