@@ -95,16 +95,26 @@ public class DBWriter {
         stmt = null;
         rs = null;
 
-        // should we also drop all existing tables?
-        // createTables();
     }
 
-    private void createTables(){
+    public void dropTables(){
+        System.out.println("Dropping Tables...");
+
+
+        System.out.println("Deletion finished");
+    }
+
+    public void createTables(){
+        System.out.println("Creating Tables...");
+
+
         executeQuery(create_individuals);
         executeQuery(create_individuals_events);
         executeQuery(create_family_spouse);
         executeQuery(create_family_child);
         executeQuery(create_family_event);
+
+        System.out.println("Creation finished...");
     }
 
 

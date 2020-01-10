@@ -20,19 +20,18 @@
  * SOFTWARE.
  */
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Parser {
 
-    public Parser() {
-
-    }
-
-    public static void main(String[] args) throws IOException {
-        System.out.println("Program Start");
+    public static void parser(String[] args) throws IOException {
         System.out.println("Parsing...");
 
+        // todo File file = new File(args[1]);
         File file = new File("../samples/gedcom_sample_file.GED");
 
         // todo try-catch
@@ -53,10 +52,10 @@ public class Parser {
         while ((line_string = file_buffer.readLine()) != null) {
             // edge case: first line has extra character
             if (line_num == 0){
-               if (!line_string.contains("0 HEAD")){
-                  throw new RuntimeException("GEDCOM file does not start correctly");
+                if (!line_string.contains("0 HEAD")){
+                    throw new RuntimeException("GEDCOM file does not start correctly");
                 }
-               System.out.println("Head found");
+                System.out.println("Head found");
             }
             else if (line_string.contains("0 TRLR")) {
                 System.out.println("Trailer found");
@@ -136,8 +135,6 @@ public class Parser {
                 // writer.executeQuery(query);
             }
         }
-
-        System.out.println("Program Completed");
 
     }
 }
