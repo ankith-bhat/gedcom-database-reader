@@ -28,6 +28,7 @@ public class Driver {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Program Start");
+        String error_message = "Only create, drop, and parse [file] commands accepted";
 
         // args lenght > 1 then create or drop
         if (args.length == 1){
@@ -36,28 +37,29 @@ public class Driver {
             // todo prompt for username and password
 
             DBWriter queryManager = new DBWriter(user, password);
-            if (args[0].equals("create")){
+            if (args[0].toLowerCase().equals("create")){
                 queryManager.createTables();
             }
-            else if (args[0].equals("drop")){
+            else if (args[0].toLowerCase().equals("drop")){
                 queryManager.dropTables();
             }
             else {
-                // throw error
+                throw new IllegalArgumentException(error_message);
             }
         }
         else if (args.length == 2){
-            if (args[0].equals("parse")){
+            if (args[0].toLowerCase().equals("parse")){
                 Parser.parser(args);
             }
             else {
-                // throw error
+                throw new IllegalArgumentException(error_message);
             }
         }
         else
         {
-            // throw error
+            throw new IllegalArgumentException(error_message);
         }
+        
         System.out.println("Program Completed");
 
     }

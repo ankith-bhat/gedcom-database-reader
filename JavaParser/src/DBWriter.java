@@ -101,7 +101,7 @@ public class DBWriter {
         System.out.println("Dropping Tables...");
 
 
-        System.out.println("Deletion finished");
+        System.out.println("Deletion finished...");
     }
 
     public void createTables(){

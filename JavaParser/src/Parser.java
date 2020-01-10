@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class Parser {
 
     public static void parser(String[] args) throws IOException {
-        System.out.println("Parsing...");
+        System.out.println("Parsing file...");
 
         // todo File file = new File(args[1]);
         File file = new File("../samples/gedcom_sample_file.GED");
