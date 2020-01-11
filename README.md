@@ -13,6 +13,8 @@ The following things need to be installed and setup:
 - MySQL JDBC Driver: https://dev.mysql.com/downloads/connector/j/
 - MySQL database: https://dev.mysql.com/doc/mysql-getting-started/en/
 
+If on Ubuntu Linux, do this extra step:
+https://marksman.wordpress.com/2009/03/01/setting-up-mysqljdbc-driver-on-ubuntu/
 
 How to run programs:
 -

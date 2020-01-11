@@ -82,7 +82,7 @@ public class DBWriter {
         // Attempt connection
         conn = null;
         try {
-            // get driver information 
+            // get driver information
             Class.forName("com.mysql.jdbc.Driver");
             conn =
                     DriverManager.getConnection("jdbc:mysql://localhost/test?" +
