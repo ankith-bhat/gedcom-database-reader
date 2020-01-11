@@ -78,18 +78,30 @@ public class DBWriter {
             + ");";
 
 
-    public DBWriter(String user, String password) {
+    public DBWriter(String user, String password) throws Exception {
         // Attempt connection
+        conn = null;
         try {
+            // get driver information 
+            Class.forName("com.mysql.jdbc.Driver");
             conn =
                     DriverManager.getConnection("jdbc:mysql://localhost/test?" +
                             "user="+ user + "&password=" + password);
 
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+//        catch (SQLException ex) {
+//            // handle any errors
+//            System.out.println("SQLException: " + ex.getMessage());
+//            System.out.println("SQLState: " + ex.getSQLState());
+//            System.out.println("VendorError: " + ex.getErrorCode());
+//        }
+        finally{
+            if (conn != null) {
+                try {
+                    conn.close();
+                    System.out.println("Database connection terminated");
+                } catch (Exception e) { /* ignore close errors */ }
+            }
         }
 
         stmt = null;

@@ -112,26 +112,25 @@ public class Parser {
 
         System.out.println("Writing to Database...");
 
-        String user = "user";
+        String user = "root";
         String password = "password";
 
         DBWriter writer = new DBWriter(user, password);
 
-        for (Individual individual : individuals){
-            String[] queries = individual.getQueries();
-            for (String query: queries){
-                System.out.println(query);
-                // writer.executeQuery(query);
-            }
-        }
-
-        for (Family family : families){
-            String[] queries = family.getQueries();
-            for (String query: queries){
-                System.out.println(query);
-                // writer.executeQuery(query);
-            }
-        }
-
+//        for (Individual individual : individuals){
+//            String[] queries = individual.getQueries();
+//            for (String query: queries){
+//                System.out.println(query);
+//                // writer.executeQuery(query);
+//            }
+//        }
+//
+//        for (Family family : families){
+//            String[] queries = family.getQueries();
+//            for (String query: queries){
+//                System.out.println(query);
+//                // writer.executeQuery(query);
+//            }
+//        }
     }
 }
