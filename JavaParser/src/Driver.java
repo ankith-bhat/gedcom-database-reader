@@ -28,6 +28,7 @@ public class Driver {
         System.out.println("Program Start");
         String error_message = "Only create, drop, and parse [file] commands accepted";
 
+        // todo combine parse and create into one, checks if tables have been created or not
         // args lenght > 1 then create or drop
         if (args.length == 1){
             String user = "user";
