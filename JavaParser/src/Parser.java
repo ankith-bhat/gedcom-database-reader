@@ -117,20 +117,22 @@ public class Parser {
 
         DBWriter writer = new DBWriter(user, password);
 
-//        for (Individual individual : individuals){
-//            String[] queries = individual.getQueries();
-//            for (String query: queries){
-//                System.out.println(query);
-//                // writer.executeQuery(query);
-//            }
-//        }
-//
-//        for (Family family : families){
-//            String[] queries = family.getQueries();
-//            for (String query: queries){
-//                System.out.println(query);
-//                // writer.executeQuery(query);
-//            }
-//        }
+        if (writer.hasConnection()) {
+    //        for (Individual individual : individuals){
+    //            String[] queries = individual.getQueries();
+    //            for (String query: queries){
+    //                System.out.println(query);
+    //                // writer.executeQuery(query);
+    //            }
+    //        }
+    //
+    //        for (Family family : families){
+    //            String[] queries = family.getQueries();
+    //            for (String query: queries){
+    //                System.out.println(query);
+    //                // writer.executeQuery(query);
+    //            }
+    //        }
+        }
     }
 }

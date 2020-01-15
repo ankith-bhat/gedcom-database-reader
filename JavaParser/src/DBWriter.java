@@ -100,6 +100,8 @@ public class DBWriter {
                 try {
                     conn.close();
                     System.out.println("Database connection terminated");
+
+                    conn = null;
                 } catch (Exception e) { /* ignore close errors */ }
             }
         }
@@ -119,7 +121,6 @@ public class DBWriter {
     public void createTables(){
         System.out.println("Creating Tables...");
 
-
         executeQuery(create_individuals);
         executeQuery(create_individuals_events);
         executeQuery(create_family_spouse);
@@ -127,6 +128,10 @@ public class DBWriter {
         executeQuery(create_family_event);
 
         System.out.println("Creation finished...");
+    }
+
+    public boolean hasConnection(){
+        return conn != null;
     }
 
 
