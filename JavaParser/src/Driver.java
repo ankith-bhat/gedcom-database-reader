@@ -30,7 +30,7 @@ public class Driver {
 
         // args lenght > 1 then create or drop
         if (args.length == 1){
-            String user = "user";
+            String user = "root";
             String password = "password";
             // todo prompt for username and password
 

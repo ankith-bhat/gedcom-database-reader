@@ -16,5 +16,8 @@ The following things need to be installed and setup:
 If on Ubuntu Linux, do this extra step:
 https://marksman.wordpress.com/2009/03/01/setting-up-mysqljdbc-driver-on-ubuntu/
 
-How to run programs:
+How to run programs (todo):
 -
+- "create"
+- "drop"
+- "parse [file]"
