@@ -31,7 +31,7 @@ public class Driver {
         // todo combine parse and create into one, checks if tables have been created or not
         // args lenght > 1 then create or drop
         if (args.length == 1){
-            String user = "user";
+            String user = "root";
             String password = "password";
             // todo prompt for username and password
 
