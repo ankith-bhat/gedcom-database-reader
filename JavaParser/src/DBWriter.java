@@ -83,13 +83,9 @@ public class DBWriter {
         conn = null;
         try {
             // get driver information
-<<<<<<< HEAD
-            Class.forName("com.mysql.jdbc.Driver");
-            String JdbcURL = "jdbc:mysql://localhost:3306/GEDCOM_TEST" + "?autoReconnect=true&useSSL=false";
-=======
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String JdbcURL = "jdbc:mysql://localhost/GEDCOM_TEST?" + "autoReconnect=true&useSSL=false";
->>>>>>> 1bd96fbecb9080611ecb21b334ee5ae4cd707d55
+            String JdbcURL = "jdbc:mysql://localhost:3306/GEDCOM_TEST" + "?autoReconnect=true&useSSL=false";
+
             conn =
                     DriverManager.getConnection(JdbcURL, user, password);
 
