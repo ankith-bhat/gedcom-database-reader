@@ -78,33 +78,61 @@ public class DBWriter {
             + ");";
 
 
-    public DBWriter(String user, String password) {
+    public DBWriter(String user, String password) throws Exception {
         // Attempt connection
+        conn = null;
         try {
-            conn =
-                    DriverManager.getConnection("jdbc:mysql://localhost/test?" +
-                            "user="+ user + "&password=" + password);
+            // get driver information
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String JdbcURL = "jdbc:mysql://localhost:3306/gedcom_test" + "?autoReconnect=true&useSSL=false";
 
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+            conn =
+                    DriverManager.getConnection(JdbcURL, user, password);
+
+        }
+//        catch (SQLException ex) {
+//            // handle any errors
+//            System.out.println("SQLException: " + ex.getMessage());
+//            System.out.println("SQLState: " + ex.getSQLState());
+//            System.out.println("VendorError: " + ex.getErrorCode());
+//        }
+        finally{
+            if (conn != null) {
+                try {
+                    conn.close();
+                    System.out.println("Database connection terminated");
+
+                    conn = null;
+                } catch (Exception e) { /* ignore close errors */ }
+            }
         }
 
         stmt = null;
         rs = null;
 
-        // should we also drop all existing tables?
-        // createTables();
     }
 
-    private void createTables(){
+    public void dropTables(){
+        System.out.println("Dropping Tables...");
+
+
+        System.out.println("Deletion finished...");
+    }
+
+    public void createTables(){
+        System.out.println("Creating Tables...");
+
         executeQuery(create_individuals);
         executeQuery(create_individuals_events);
         executeQuery(create_family_spouse);
         executeQuery(create_family_child);
         executeQuery(create_family_event);
+
+        System.out.println("Creation finished...");
+    }
+
+    public boolean hasConnection(){
+        return conn != null;
     }
 
 

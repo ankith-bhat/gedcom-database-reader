@@ -20,25 +20,21 @@
  * SOFTWARE.
  */
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Parser {
 
-    public Parser() {
+    public static void parser(String[] args) throws Exception {
+        System.out.println("Parsing file...");
 
-    }
-
-    public static void main(String[] args) throws IOException {
-        System.out.println("Program Start");
-        System.out.println("Parsing...");
-
+        // todo replace w/ File file = new File(args[1]);
         File file = new File("../samples/gedcom_sample_file.GED");
 
-        // todo try-catch
         BufferedReader file_buffer = new BufferedReader(new FileReader(file));
 
-        // todo try-catch
         String line_string;
         int line_num = 0;
 
@@ -53,10 +49,10 @@ public class Parser {
         while ((line_string = file_buffer.readLine()) != null) {
             // edge case: first line has extra character
             if (line_num == 0){
-               if (!line_string.contains("0 HEAD")){
-                  throw new RuntimeException("GEDCOM file does not start correctly");
+                if (!line_string.contains("0 HEAD")){
+                    throw new RuntimeException("GEDCOM file does not start correctly");
                 }
-               System.out.println("Head found");
+                System.out.println("Head found");
             }
             else if (line_string.contains("0 TRLR")) {
                 System.out.println("Trailer found");
@@ -116,28 +112,27 @@ public class Parser {
 
         System.out.println("Writing to Database...");
 
-        String user = "user";
+        String user = "root";
         String password = "password";
 
         DBWriter writer = new DBWriter(user, password);
 
-        for (Individual individual : individuals){
-            String[] queries = individual.getQueries();
-            for (String query: queries){
-                System.out.println(query);
-                // writer.executeQuery(query);
-            }
+        if (writer.hasConnection()) {
+    //        for (Individual individual : individuals){
+    //            String[] queries = individual.getQueries();
+    //            for (String query: queries){
+    //                System.out.println(query);
+    //                // writer.executeQuery(query);
+    //            }
+    //        }
+    //
+    //        for (Family family : families){
+    //            String[] queries = family.getQueries();
+    //            for (String query: queries){
+    //                System.out.println(query);
+    //                // writer.executeQuery(query);
+    //            }
+    //        }
         }
-
-        for (Family family : families){
-            String[] queries = family.getQueries();
-            for (String query: queries){
-                System.out.println(query);
-                // writer.executeQuery(query);
-            }
-        }
-
-        System.out.println("Program Completed");
-
     }
 }
