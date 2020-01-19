@@ -77,6 +77,15 @@ public class DBWriter {
             + "FOREIGN KEY (FamilyID) REFERENCES FamilySpouse(ID)"
             + ");";
 
+    private final String drop_individuals = "DROP TABLE IF EXISTS Individuals";
+
+    private final String drop_individuals_events = "DROP TABLE IF EXISTS IndividualEvents";
+
+    private final String drop_family_spouse = "DROP TABLE IF EXISTS FamilySpouse";
+
+    private final String drop_family_child = "DROP TABLE IF EXISTS FamilyChild";
+
+    private final String drop_family_event = "DROP TABLE IF EXISTS FamilyEvents";
 
     public DBWriter(String user, String password) throws Exception {
         // Attempt connection
@@ -115,6 +124,11 @@ public class DBWriter {
     public void dropTables(){
         System.out.println("Dropping Tables...");
 
+        executeQuery(drop_individuals);
+        executeQuery(drop_individuals_events);
+        executeQuery(drop_family_spouse);
+        executeQuery(drop_family_child);
+        executeQuery(drop_family_event);
 
         System.out.println("Deletion finished...");
     }
