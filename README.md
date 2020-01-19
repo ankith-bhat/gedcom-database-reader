@@ -9,12 +9,23 @@ Assumptions:
 
 The following things need to be installed and setup:
 -
+
+For Windows:
+-
+- Java with JRE 11 or more recent version:
+- MySQL database: https://dev.mysql.com/doc/mysql-getting-started/en/
+
+For Linux/MacOS:
+-
 - Java with JRE 11 or more recent version:
 - MySQL JDBC Driver: https://dev.mysql.com/downloads/connector/j/
 - MySQL database: https://dev.mysql.com/doc/mysql-getting-started/en/
 
+
 If on Ubuntu Linux, do this extra step:
 https://marksman.wordpress.com/2009/03/01/setting-up-mysqljdbc-driver-on-ubuntu/
+
+// CLASSPATH JDBC DRiver when running todo
 
 How to run programs (todo):
 -

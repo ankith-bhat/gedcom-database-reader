@@ -74,7 +74,7 @@ public class DBWriter {
             + "Place CHAR(1),"
             + "Date VARCHAR(15),"
             + "PRIMARY KEY (FamilyID, EventTag),"
-            + "FOREIGN KEY (FamilyID) REFERENCES FamilySpouse(ID)"
+            + "FOREIGN KEY (FamilyID) REFERENCES FamilySpouse(FamilyID)"
             + ");";
 
     private final String drop_individuals = "DROP TABLE IF EXISTS Individuals";
@@ -106,14 +106,7 @@ public class DBWriter {
 //            System.out.println("VendorError: " + ex.getErrorCode());
 //        }
         finally{
-            if (conn != null) {
-                try {
-                    conn.close();
-                    System.out.println("Database connection terminated");
 
-                    conn = null;
-                } catch (Exception e) { /* ignore close errors */ }
-            }
         }
 
         stmt = null;
@@ -160,7 +153,7 @@ public class DBWriter {
 
         try {
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(query);
+            stmt.executeUpdate(query);
 
             // Now do something with the ResultSet ....
             // todo print success?
