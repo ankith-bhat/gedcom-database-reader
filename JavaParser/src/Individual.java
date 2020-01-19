@@ -113,6 +113,10 @@ public class Individual {
         public Death() {}
     }
 
+    private class Adoption extends Event{
+        public Adoption() {}
+    }
+
     private class Spouse extends Attribute {
         private String family_id;
 
@@ -149,6 +153,7 @@ public class Individual {
     private Birth birth;
     private Baptism baptism;
     private Death death;
+    private Adoption adoption;
     private ArrayList<Spouse> spouses;
     private Child child; // can you belong to more than one family?
     private Flag flag;
@@ -213,6 +218,11 @@ public class Individual {
             {
                 death = new Death();
                 current_attribute = death;
+            }
+            else if (attr.equals("ADOP"))
+            {
+                adoption = new Adoption();
+                current_attribute = adoption;
             }
             else if (attr.equals("FAMS"))
             {
@@ -324,7 +334,7 @@ public class Individual {
 
         //Put Caste in main query instead (goes to INDIVIDUALS)
 
-        //Birth, Baptism, and Death treated the same
+        //Birth, Baptism, and Death and Adoption treated the same
         if (birth != null) {
             queries.add(queryHelper("BIRT", birth));
         }
@@ -333,6 +343,9 @@ public class Individual {
         }
         if (death != null){
             queries.add(queryHelper("DEAT", death));;
+        }
+        if (adoption != null){
+            queries.add(queryHelper("ADOP", adoption));
         }
 
 
