@@ -107,12 +107,12 @@ public class Family {
         ArrayList<String> queries = new ArrayList<>();
 
 
-        String spouse_query = "INSERT INTO FamilySpouse VALUES (" + family_id + ", " + spouse1_id + ", " + spouse2_id + ");";
+        String spouse_query = "INSERT INTO FamilySpouse VALUES ('" + family_id + "', '" + spouse1_id + "', '" + spouse2_id + "');";
         queries.add(spouse_query);
 
         int child_order = 1;
         for (String child_id : children_id){
-            String child_query = "INSERT INTO FamilyChild VALUES (" + family_id + ", " + child_id + ", " + child_order + ");";
+            String child_query = "INSERT INTO FamilyChild VALUES ('" + family_id + "', '" + child_id + "', '" + child_order + "');";
             queries.add(child_query);
             child_order++;
         }

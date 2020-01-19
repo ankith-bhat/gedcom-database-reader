@@ -62,7 +62,7 @@ public class DBWriter {
     private final String create_family_child = "CREATE TABLE FamilyChild ("
             + "FamilyID VARCHAR(10) NOT NULL,"
             + "ChildID VARCHAR(10) NOT NULL,"
-            + "ChildOrder INT NOT NULL,"
+            + "ChildOrder VARCHAR(2) NOT NULL,"
             + "PRIMARY KEY (FamilyID, ChildID),"
             + "FOREIGN KEY (FamilyID) REFERENCES FamilySpouse(FamilyID),"
             + "FOREIGN KEY (ChildID) REFERENCES Individuals(ID)"
