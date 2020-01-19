@@ -45,7 +45,7 @@ public class DBWriter {
             + "ID VARCHAR(10) NOT NULL,"
             + "EventTag VARCHAR(45) NOT NULL,"
             + "Place VARCHAR(45),"
-            + "Date VARCHAR(15),"
+            + "Date VARCHAR(45),"
             + "PRIMARY KEY (ID, EventTag),"
             + "FOREIGN KEY (ID) REFERENCES Individuals(ID)"
             + ");";
