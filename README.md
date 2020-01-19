@@ -27,6 +27,8 @@ https://marksman.wordpress.com/2009/03/01/setting-up-mysqljdbc-driver-on-ubuntu/
 
 // CLASSPATH JDBC DRiver when running todo
 
+https://raima.com/how-to-create-a-database-using-jdbc/  
+
 How to run programs (todo):
 -
 - "create"
