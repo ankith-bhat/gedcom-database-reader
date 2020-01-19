@@ -44,7 +44,7 @@ public class DBWriter {
     private final String create_individuals_events = "CREATE TABLE IndividualEvents ("
             + "ID VARCHAR(10) NOT NULL,"
             + "EventTag VARCHAR(45) NOT NULL,"
-            + "Place CHAR(1),"
+            + "Place VARCHAR(45),"
             + "Date VARCHAR(15),"
             + "PRIMARY KEY (ID, EventTag),"
             + "FOREIGN KEY (ID) REFERENCES Individuals(ID)"
