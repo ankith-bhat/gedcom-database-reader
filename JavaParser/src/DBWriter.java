@@ -117,12 +117,12 @@ public class DBWriter {
     public void dropTables(){
         System.out.println("Dropping Tables...");
 
-        executeQuery(drop_individuals);
-        executeQuery(drop_individuals_events);
-        executeQuery(drop_family_spouse);
-        executeQuery(drop_family_child);
         executeQuery(drop_family_event);
-
+        executeQuery(drop_family_child);
+        executeQuery(drop_family_spouse);
+        executeQuery(drop_individuals_events);
+        executeQuery(drop_individuals);
+        
         System.out.println("Deletion finished...");
     }
 
