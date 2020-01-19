@@ -204,7 +204,7 @@ public class Individual {
                 birth = new Birth();
                 current_attribute = birth;
             }
-            else if (attr.equals("BAPT"))
+            else if (attr.equals("BAPM"))
             {
                 baptism = new Baptism();
                 current_attribute = baptism;
@@ -224,6 +224,10 @@ public class Individual {
             {
                 child = new Child(contents);
                 current_attribute = child;
+            }
+            else {
+                System.out.println("This program does not deal with this attribute: " + line_string);
+                current_attribute = null;
             }
         }
 
@@ -354,6 +358,11 @@ public class Individual {
         if (name.first_name != null) name_string.append(name.first_name + " ");
         if (name.middle_name != null) name_string.append(name.middle_name + " ");
         if (name.last_name != null) name_string.append(name.last_name);
+
+        if (birth != null) name_string.append(" birth: " + birth.toString() + "\n");
+        if (baptism != null) name_string.append(" baptism: " + baptism.toString()  + "\n");
+        if (death != null) name_string.append(" death: " + death.toString()  + "\n");
+
 
         return name_string.toString();
     }

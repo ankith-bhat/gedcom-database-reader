@@ -33,10 +33,12 @@ public class Event extends Attribute {
         if (attr.equals("PLAC"))
         {
             place = contents;
+            return;
         }
         else if (attr.equals("DATE"));
         {
             date = contents;
+            return;
         }
 
     }
@@ -47,5 +49,15 @@ public class Event extends Attribute {
 
     public String getDate(){
         return date;
+    }
+
+    public String toString(){
+        StringBuilder stringbuilder = new StringBuilder();
+
+        if (place != null) stringbuilder.append(" place : " + place);
+        if (date != null) stringbuilder.append(" date: " + date);
+
+        return stringbuilder.toString();
+
     }
 }

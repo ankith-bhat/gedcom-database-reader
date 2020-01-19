@@ -31,7 +31,7 @@ public class Parser {
         System.out.println("Parsing file...");
 
         // todo replace w/ File file = new File(args[1]);
-        File file = new File("../samples/gedcom_sample_file.GED");
+        File file = new File(args[1]);
 
         BufferedReader file_buffer = new BufferedReader(new FileReader(file));
 
