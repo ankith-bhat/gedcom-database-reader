@@ -256,29 +256,29 @@ public class Individual {
         // INSERT INTO Individuals (ID, FirstName, LastName) VALUES (12, Ankith, Bhat)
 
         query_command.append("INSERT INTO Individuals (ID");
-        query_values.append("VALUES (" + id);
+        query_values.append("VALUES ('" + id + "'");
 
         if (name != null){
             if (name.hasFirstName()) {
                 query_command.append(", FirstName");
-                query_values.append(", " + name.first_name);
+                query_values.append(", '" + name.first_name + "'");
             }
             if (name.hasMiddleName()) {
                 query_command.append(", MiddleName");
-                query_values.append(", " + name.middle_name);
+                query_values.append(", '" + name.middle_name + "'");
             }
             if (name.hasLastName()) {
                 query_command.append(", LastName");
-                query_values.append(", " + name.last_name);
+                query_values.append(", '" + name.last_name + "'");
             }
         }
         if (sex != null){
             query_command.append(", Sex");
-            query_values.append(", " + sex.sex);
+            query_values.append(", '" + sex.sex + "'");
         }
         if (caste != null){
             query_command.append(", Caste");
-            query_values.append(", " + caste.caste);
+            query_values.append(", '" + caste.caste + "'");
         }
         query_command.append(") ");
         query_values.append(");");
@@ -292,15 +292,15 @@ public class Individual {
             StringBuilder event_query_values = new StringBuilder(100);
 
             event_query_command.append("INSERT INTO IndividualEvents (ID, EventTag");
-            event_query_values.append("VALUES (" + id + ", " + queryType);
+            event_query_values.append("VALUES ('" + id + "', '" + queryType + "'");
 
             if (e.getPlace() != null) {
                 event_query_command.append(", Place");
-                event_query_values.append(", " + e.getPlace());
+                event_query_values.append(", '" + e.getPlace() + "'");
             }
             if (e.getDate() != null) {
                 event_query_command.append(", Date");
-                event_query_values.append(", " + e.getDate());
+                event_query_values.append(", '" + e.getDate() + "'");
             }
 
             event_query_command.append(") ");
