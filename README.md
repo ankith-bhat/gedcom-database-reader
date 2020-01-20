@@ -26,8 +26,8 @@ If on Ubuntu Linux, do this extra step:
 https://marksman.wordpress.com/2009/03/01/setting-up-mysqljdbc-driver-on-ubuntu/
 
 // CLASSPATH JDBC DRiver when running todo
+C:\Program Files (x86)\MySQL\Connector J 8.0\mysql-connector-java-8.0.19.jar
 
-https://raima.com/how-to-create-a-database-using-jdbc/  
 
 How to run programs (todo):
 -
