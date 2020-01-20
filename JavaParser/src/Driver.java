@@ -21,6 +21,8 @@
  */
 
 
+import java.util.Scanner;
+
 public class Driver {
 
 
@@ -31,29 +33,49 @@ public class Driver {
         // todo combine parse and create into one, checks if tables have been created or not
         // args lenght > 1 then create or drop
         if (args.length == 1){
-            String user = "root";
-            String password = "password";
-            // todo prompt for username and password
 
-            DBWriter queryManager = new DBWriter(user, password);
             if (args[0].toLowerCase().equals("create")){
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("(The default user is root: ");
+                System.out.print("Enter the mySQL DB username: ");
+                String user = scanner.nextLine();
+
+
+                System.out.print("(The default password is password: ");
+                System.out.print("Enter the mySQL DB password: ");
+                String password = scanner.nextLine();
+
+                DBWriter queryManager = new DBWriter(user, password);
+
                 queryManager.createTables();
             }
             else if (args[0].toLowerCase().equals("drop")){
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("(The default user is root: ");
+                System.out.print("Enter the mySQL DB username: ");
+                String user = scanner.nextLine();
+
+
+                System.out.print("(The default password is password: ");
+                System.out.print("Enter the mySQL DB password: ");
+                String password = scanner.nextLine();
+
+                DBWriter queryManager = new DBWriter(user, password);
+
                 queryManager.dropTables();
             }
+            else if (args[0].toLowerCase().equals("parse")){
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Enter the GEDCOM filename: ");
+                String file_name = scanner.nextLine();
+
+                Parser.parser(file_name);
+            }
             else {
                 throw new IllegalArgumentException(error_message);
             }
         }
-        else if (args.length == 2){
-            if (args[0].toLowerCase().equals("parse")){
-                Parser.parser(args);
-            }
-            else {
-                throw new IllegalArgumentException(error_message);
-            }
-        }
+
         else
         {
             throw new IllegalArgumentException(error_message);
